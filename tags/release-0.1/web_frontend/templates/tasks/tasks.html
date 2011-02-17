@@ -1,0 +1,21 @@
+{% extends "default.html" %}
+
+{% block breadcrumbs_l2 %} <a href="http://{{request.get_host}}/tasks/">Tasks</a> &gt;&gt; {% block breadcrumbs_l3 %}{%endblock%}{%endblock%}
+
+{% block tasklist %}
+<ul>
+    <li><a href="http://{{request.get_host}}/tasks/new/sensitivity_optimization">Optimization of Sensitivities</a></li>
+    <li><a href="http://{{request.get_host}}/tasks/new/stochastic_simulation">Stochastic Simulation</a></li>
+    <li><a href="http://{{request.get_host}}/tasks/new/parallel_scan">Scan in Parallel</a></li>
+    <li><a href="http://{{request.get_host}}/tasks/new/optimization_repeat">Optimization Repeat</a></li>
+    <li><a href="http://{{request.get_host}}/tasks/new/parameter_estimation_repeat">Parameter Estimation Repeat</a></li>
+    <li><a href="http://{{request.get_host}}/tasks/new/optimization_repeat_different_algorithms">Optimization Repeat (Different Algorithms)</a></li>
+</ul>
+{% endblock %}
+
+{%block body %}
+
+<p>List of tasks to go here, along with task descriptions
+
+
+{%endblock%}

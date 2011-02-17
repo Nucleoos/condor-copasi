@@ -1,0 +1,67 @@
+{# Root HTML template #}
+{% autoescape on %}
+<html>
+<head>
+<title>
+Condor-Copasi Web Frontend - {% block title %} {{ pageTitle }} {% endblock %}
+</title>
+<link rel="stylesheet" type="text/css" href="http://{{ request.get_host }}/static/style.css" /> 
+{%block head%}
+{% endblock %}
+</head>
+
+<body {% block bodyattrs%}{%endblock%}>
+<div id="container">
+    <div id="wrapper">
+        <div id="header">
+            <div id="branding">
+                Condor-Copasi
+            </div>
+            <div id="user_tools">
+                {% if user.is_authenticated %}
+                Welcome <b> {{ user.username }} </b> | <a href="http://{{request.get_host}}/logout">Logout</a>
+                {% else %}
+                <a href="http://{{request.get_host}}/login">Login</a>
+                {% endif %}
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="breadcrumbs">
+            <a href="http://{{request.get_host}}/">Home</a> &gt;&gt;
+            {% block breadcrumbs_l2 %}{% endblock %}
+        </div>
+        <div id="main">
+            <div id="sidebar">
+            {% block sidebar %}
+                <ul>
+                    <li><a href="http://{{request.get_host}}/">Home</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="http://{{request.get_host}}/my_account/">My Account</a></li>
+                    {% block accountlist %}{% endblock %}
+                    <li><a href="http://{{request.get_host}}/tasks">Tasks</a></li>
+                    {% block tasklist %}{% endblock %}
+                    {%endif%}
+                    <li>Help</li>
+                </ul>
+            {% endblock %}
+            </div>
+            <div id="content">    
+                {% if message %}
+                    <div class="message">
+                    {{message}}
+                    </div>
+                {% endif %}
+                <h1>{{ pageTitle }}</h1>
+                {% block body %}
+                Body text
+                {% endblock %}
+            </div>    
+        </div>
+    </div>
+    <div id="footer">
+        Condor-Copasi Web Frontend, version 0.1. Copyright 2010.
+    </div>
+</div>
+</body>
+</html>
+{% endautoescape %}
