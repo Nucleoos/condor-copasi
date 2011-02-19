@@ -1,3 +1,30 @@
 Information on deploying the web frontend
 
-More to come
+=Deployment steps - complicated!=
+
+==Database setup==
+* Install database server, and where necessary, appropriate python bindings
+** We recommend postgresql with the psycogp2 python wrapper
+
+* Set up a database user and password with appropriate permissions
+** In postgres (Ubuntu), this involves changing the default local authentication from ident to md5
+
+==Web server setup==
+* Install a web server and with python module
+** We recommend Apache with mod_wsgi
+
+* Copy web frontend source to /var/www/condor-copasi
+* Link the Django admin media files to a directory in /var/www/condor-copasi/admin-media
+
+* Configure apache site config
+** Under Ubuntu, this involves adding a new site to /etc/apache2/sites-available:
+Note, the configuration contains 3 steps:
+# Setup an alias for serving static media
+# Setup the Django mod_wsgi alias
+# Set an alias for serving the admin media
+
+==Helper daemon Setup==
+
+==User and permissions setup==
+-Create user to run helper dameon
+-Create group that holds 
