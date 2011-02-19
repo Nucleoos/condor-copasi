@@ -3,8 +3,8 @@ Information on deploying the web frontend
 =Deployment steps - complicated!=
 
 ==Database setup==
-* Install database server, and where necessary, appropriate python bindings
-** We recommend postgresql with the psycogp2 python wrapper
+  * Install database server, and where necessary, appropriate python bindings
+    * We recommend postgresql with the psycogp2 python wrapper
 
 * Set up a database user and password with appropriate permissions
 ** In postgres (Ubuntu), this involves changing the default local authentication from ident to md5
