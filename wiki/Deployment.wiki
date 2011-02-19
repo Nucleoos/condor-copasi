@@ -71,4 +71,5 @@ TODO, any more??
   * The helper deamon must be able to write to a log file
     * We recommend creating an appropriate file in /var/log with permissions set so that copasi-condor can write to it
 
-
+==Finally, change settings.py==
+  * Add appropriate user settings, e.g. subfolder, user_files_dir etc.
