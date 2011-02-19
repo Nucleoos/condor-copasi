@@ -6,25 +6,69 @@ Information on deploying the web frontend
   * Install database server, and where necessary, appropriate python bindings
     * We recommend postgresql with the psycogp2 python wrapper
 
-* Set up a database user and password with appropriate permissions
-** In postgres (Ubuntu), this involves changing the default local authentication from ident to md5
+  * Set up a database user and password with appropriate permissions
+    * In postgres (Ubuntu), this involves changing the default local authentication from ident to md5
 
 ==Web server setup==
-* Install a web server and with python module
-** We recommend Apache with mod_wsgi
+  * Install a web server and with python module
+    * We recommend Apache with mod_wsgi
 
-* Copy web frontend source to /var/www/condor-copasi
-* Link the Django admin media files to a directory in /var/www/condor-copasi/admin-media
+  * Copy web frontend source to /var/www/condor-copasi
+  * Link the Django admin media files to a directory in /var/www/condor-copasi/admin-media
 
-* Configure apache site config
-** Under Ubuntu, this involves adding a new site to /etc/apache2/sites-available:
+  * Configure apache site config
+    * Under Ubuntu, this involves adding a new site to /etc/apache2/sites-available:
+
+{{{
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+
+    Alias /condor-copasi/static/style.css /var/www/condor-copasi/web_frontend/static/style.css
+
+    <Directory /var/www/condor-copasi/web_frontend/static>
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    Alias /condor-copasi/admin/static /var/www/condor-copasi/admin-media/
+
+    <Directory /var/www/condor-copasi/admin-media>
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    WSGIScriptAlias /condor-copasi /var/www/condor-copasi/web_frontend/apache/django.wsgi
+
+    <Directory /var/www/condor-copasi/web_frontend/apache>
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    ErrorLog /var/log/apache2/error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel debug
+
+    CustomLog /var/log/apache2/access.log combined
+
+</VirtualHost>
+}}}
 Note, the configuration contains 3 steps:
-# Setup an alias for serving static media
-# Setup the Django mod_wsgi alias
-# Set an alias for serving the admin media
+  # Setup an alias for serving static media
+  # Setup the Django mod_wsgi alias
+  # Set an alias for serving the admin media
 
 ==Helper daemon Setup==
 
 ==User and permissions setup==
--Create user to run helper dameon
--Create group that holds 
+  * Create user to run helper dameon, e.g. copasi-condor
+  * Create group that contains www-data and copasi-condor
+  * Create a directory to hold uploaded files, and automatically generated files. The permissions for this must be set so it is readable and writable by www-data. TODO:Set sticky bit g+s so that new files retain permissions???
+TODO, any more??
+
+==Logging setup==
+  * The helper deamon must be able to write to a log file
+    * We recommend creating an appropriate file in /var/log with permissions set so that copasi-condor can write to it
+
+
