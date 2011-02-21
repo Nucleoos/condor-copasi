@@ -52,8 +52,8 @@ See http://docs.djangoproject.com/en/1.2/howto/deployment/modwsgi/ for general d
     {{{sudo touch /etc/apache2/sites-available/condor-copasi}}}
     * Under other distributions, this may involve editing your httpd.conf file
     * *The configuration file contains three parts:
-      * An alias for serving the static file style.css
-      * An alias for serving the static media for the admin site
+      * An alias for serving the static file style.css in the directory /static/
+      * An alias for serving the static media for the admin site in the directory /admin/static/
       * A WSGIScript alias*
     * The example below assumes that we wish to serve the web frontend in the subfolder /condor-copasi
 {{{
