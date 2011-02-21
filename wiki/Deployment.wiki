@@ -1,26 +1,55 @@
-The Condor Copasi Web Frontend is written as a [http://docs.djangoproject.com/en/1.2/releases/1.2.4/ Django 1.2.4 Application]
-=Deployment steps - complicated!=
+The Condor Copasi Web Frontend is written in Python as a [http://docs.djangoproject.com/en/1.2/releases/1.2.4/ Django 1.2.4 Application]. In addition to the web frontend, a background daemon must be configured. This daemon periodically checks for new jobs to submit to condor, and checks on the status of jobs that have already been submitted.
+
+=Web Frontend=
+Deployment involves a few additional steps in addition to the standard Django application deployment procedure.
+
+==Django setup==
+Django version 1.2.4 or 1.2.5 must be installed and in the Python path. See http://www.djangoproject.com/download/ for details.
 
 ==Database setup==
-  * Install database server, and where necessary, appropriate python bindings
-    * We recommend postgresql with the psycogp2 python wrapper
+Condor Copasi uses a database to store information on users and the jobs they have submitted. Django supports a number of different databases (see http://docs.djangoproject.com/en/1.2/ref/databases/), including:
+  * PostgreSQL
+  * MySQL
+  * SQLite
+  * Oraclesudo ln -s
+Note that an appropriate python wrapper must also be installed.
 
-  * Set up a database user and password with appropriate permissions
-    * In postgres (Ubuntu), this involves changing the default local authentication from ident to md5
+While all these databases should, in theory, work with Condor Copasi, note that we have only tested with PostgreSQL 8.4 with the [http://initd.org/psycopg/ psycopg2] Python adaptor.
+
+===Configuring the database===
+A new database should be created, and  username and password should be set up to allow Condor Copasi to access this database. Refer to your database documentation for details on how to do this. Initially this user must have permission to create tables in the database, though after the database has been initially populated (see below), this privilege can be dropped. 
+
+Note that the database will be accessed by both the web frontend and the background daemon using the same database username/password combination. Depending on your system configuration, it is likely that the web server and background daemon will be running as different users, and so the database must be configured to accommodate this situation.
+
+In PostgreSQL, this involves changing the default local authentication method from ident to md5 in pg_hba.conf:
+{{{
+# IPv4 local connections:
+host    all         all         127.0.0.1/32          md5
+}}}
 
 ==Web server setup==
-  * Install a web server and with python module
-    * We recommend Apache with mod_wsgi
+The web frontend can be run on any web server capable of running Django applications (see http://docs.djangoproject.com/en/1.2/howto/deployment/), though the Django documentation recommends Apache with the mod_wsgi Python interface. Condor Copasi ships with a configuration for Apache and mod_wsgi.
 
-  * Copy web frontend source to /var/www/condor-copasi
-  * Link the Django admin media files to a directory in /var/www/condor-copasi/admin-media
+See http://docs.djangoproject.com/en/1.2/howto/deployment/modwsgi/ for general details on deployment. See below for the steps involved using Ubuntu:
 
+  * Ensure Apache and mod_wsgi are installed and configured correctly
+  * Create a directory to hold the web_frontend folder
+  {{{sudo mkdir /var/www/condor_copasi}}}
+  * Copy web_frontend folder to /var/www/condor-copasi
+  {{{sudo cp -r path/to/web_frontend /var/www/condor-copasi}}}
+  * Create a link to the Django admin media files in /var/www/condor-copasi
+  {{{sudo ln -s  /usr/local/lib/python2.6/dist-packages/django/contrib/admin/media/ /var/www/condor-copasi/admin-media}}}
   * Configure apache site config
-    * Under Ubuntu, this involves adding a new site to /etc/apache2/sites-available:
-
+    * Under Ubuntu, this involves adding a new file to /etc/apache2/sites-available:
+    {{{sudo touch /etc/apache2/sites-available/condor-copasi}}}
+    * Under other distributions, this may involve editing your httpd.conf file
+    * *The configuration file contains three parts:
+      * An alias for serving the static file style.css
+      * An alias for serving the static media for the admin site
+      * A WSGIScript alias*
+    * The example below assumes that we wish to serve the web frontend in the subfolder /condor-copasi
 {{{
 <VirtualHost *:80>
-    ServerAdmin webmaster@localhost
 
     Alias /condor-copasi/static/style.css /var/www/condor-copasi/web_frontend/static/style.css
 
@@ -53,22 +82,52 @@ The Condor Copasi Web Frontend is written as a [http://docs.djangoproject.com/en
 
 </VirtualHost>
 }}}
-Note, the configuration contains 3 steps:
-  # Setup an alias for serving static media
-  # Setup the Django mod_wsgi alias
-  # Set an alias for serving the admin media
+    * Under Ubuntu, the site must then be enabled:
+    {{{
+sudo a2ensite condor-copasi
+sudo service apache2 restart
+    }}}
+    * Note that WSGIScriptAlias points to the file web_frontend/apache/django.wsgi. This file is configured to ensure that the web_frontend directory, and the directory above that (in this example condor-copasi) are both added to the python path, and shouldn't need editing unless you change the structure of code.
 
-==Helper daemon Setup==
+=Background Daemon=
+The background daemon runs in addition to the web server, periodically checking the database for new jobs to submit to Condor, and checking the status of existing jobs on Condor queue.
 
 ==User and permissions setup==
-  * Create user to run helper dameon, e.g. copasi-condor
-  * Create group that contains www-data and copasi-condor
-  * Create a directory to hold uploaded files, and automatically generated files. The permissions for this must be set so it is readable and writable by www-data. TODO:Set sticky bit g+s so that new files retain permissions???
-TODO, any more??
+For security reasons, we recommend creating a new user to run the condor-copasi-daemon. E.g.:
+{{{adduser condor-copasi-user}}}
+In addition to the new user, a new group should be created containing both the Condor Copasi daemon user and the web server user (e.g. condor-copasi-user and www-data). E.g.
+{{{
+sudo addgroup condor-copasi
+sudo adduser www-data condor-copasi
+sudo adduser condor-copasi-user condor-copasi
+}}}
 
+==Install the helper daemon==
+TODO: copy the helper daemon somewhere...
+
+==Uploaded files directory==
+A directory must be created 
+Create a directory to hold uploaded files, and any automatically generated files. This directory must be readable and writeable by www-data and condor-copasi-user. The easiest way to achieve this is to set it as owned by the the condor-copasi group, and add rwx group permissions. We also add the SGID bit +s to ensure that all files and directories added retain the same group:
+{{{
+sudo mkdir /var/www/condor-copasi/user-files
+shudo chgrp condor-copasi /var/www/condor-copasi/user-files
+sudo chmod g+rws /var/www/condor-copasi/user-files
+}}}
+
+==Configure the Web Server Umask==
+Although we have now created a folder that has the appropriate group permissions, by default, any directories and files added by Apache will not be group writeable. To fix this, change the default umask for Apache to 002 (add the following line to /etc/apache2/envvars and restart Apache):
+{{{umask 002}}}
+*TODO: does this present a security risk? Is there a better way of doing this?*
 ==Logging setup==
-  * The helper deamon must be able to write to a log file
-    * We recommend creating an appropriate file in /var/log with permissions set so that copasi-condor can write to it
+The helper deamon must be able to write to a log file. We recommend creating a folder in /var/log that is writeable by the condor-copasi group. We can then configure Condor Copasi to write logs to this directory (see below):
+{{{
+sudo mkdir /var/log/condor-copasi
+sudo chgrp condor-copasi /var/log/condor-copasi
+sudo chmod g+rws /var/log/condor-copasi
+}}}
 
-==Finally, change settings.py==
-  * Add appropriate user settings, e.g. subfolder, user_files_dir etc.
+
+=Configure Condor-Copasi=
+With the Web Frontend and Background Daemon configured, Condor Copasi must now be configured. The configuration file {{{settings.py}}} is located in the {{{web_frontend}}} directory (in the example configuration above, this is located in {{{/var/www/condor-copasi}}}).
+  * If necessary, change the database engine, name, username and password. Host and port can be left blank if the database is running on the local server.
+  * 
