@@ -1,10 +1,18 @@
 The Condor Copasi Web Frontend is written in Python as a [http://docs.djangoproject.com/en/1.2/releases/1.2.4/ Django 1.2.4 Application]. In addition to the web frontend, a background daemon must be configured. This daemon periodically checks for new jobs to submit to condor, and checks on the status of jobs that have already been submitted.
 
-=Web Frontend=
-Deployment involves a few additional steps in addition to the standard Django application deployment procedure.
+=General setup=
+
+==Python setup==
+Python 2.6 must be installed and configured.
 
 ==Django setup==
 Django version 1.2.4 or 1.2.5 must be installed and in the Python path. See http://www.djangoproject.com/download/ for details.
+
+
+
+=Web Frontend=
+Deployment involves a few additional steps in addition to the standard Django application deployment procedure.
+
 
 ==Database setup==
 Condor Copasi uses a database to store information on users and the jobs they have submitted. Django supports a number of different databases (see http://docs.djangoproject.com/en/1.2/ref/databases/), including:
