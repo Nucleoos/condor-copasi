@@ -198,3 +198,14 @@ The daemon can then be stopped:
 {{{
 /path/to/daemon.py stop
 }}}
+
+=Start Apache=
+If Apache isn't already running, start it. Otherwise, reload it to load the new configuration
+
+{{{
+sudo service apache2 start
+}}}
+or
+{{{
+sudo service apache2 restart
+}}}
