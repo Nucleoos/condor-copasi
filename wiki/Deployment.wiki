@@ -133,7 +133,7 @@ With the Web Frontend and Background Daemon installed and set up, Condor Copasi 
   * Change the secret key to a random string
   * Set SITE_SUBFOLDER to the folder at which the web server is serving the web frontend, e.g. {{{'/condor-copasi/'}}} if the web frontend is being served at {{{www.example.com/condor-copasi}}}. If serving at the root folder, set to {{{'/'}}}
   * Set USER_FILES_DIR to the absolute path of the directory created earlier to store user-uploaded and automatically generated files. Remember, this must be readable and writeable by the web server and the background daemon.
-  * Set LOG_FILE to the absolute path of the log file we wish to write to. Remember, the background daemon must be able to write to the parent folder.
+  * Set LOG_FILE to the absolute path of the log file we wish to write to. Remember, the background daemon must be able to write to this file and to the parent folder.
   * If necessary, change the logging level (options are logging.DEBUG to record all debugging messages and logging.ERROR to just record error messages).
   * Set COPASI_BINARY_DIR to the absolute path of the directory containing the CopasiSE binaries for all operating systems. The binaries should be named as follows:
     {{{
