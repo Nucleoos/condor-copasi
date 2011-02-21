@@ -1,5 +1,4 @@
-Information on deploying the web frontend
-
+The Condor Copasi Web Frontend is written as a [http://docs.djangoproject.com/en/1.2/releases/1.2.4/ Django 1.2.4 Application]
 =Deployment steps - complicated!=
 
 ==Database setup==
