@@ -19,7 +19,7 @@ Condor Copasi uses a database to store information on users and the jobs they ha
   * PostgreSQL
   * MySQL
   * SQLite
-  * Oraclesudo ln -s
+  * Oracle
 Note that an appropriate python wrapper must also be installed.
 
 While all these databases should work with Condor Copasi, please note that we have only tested with PostgreSQL 8.4 with the [http://initd.org/psycopg/ psycopg2] Python adaptor.
