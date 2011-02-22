@@ -132,6 +132,10 @@ export PYTHONPATH=$PYTHONPATH:/var/www/condor-copasi:/var/www/condor-copasi/web_
 export DJANGO_SETTINGS_MODULE=web_frontend.settings
 /opt/condor-copasi-daemon/condor-copasi-daemon.py $@
 }}}
+And mark it as executable
+{{{
+sudo chmod +x /usr/bin/condor-copasi-daemon
+}}}
 
 ==Uploaded files directory==
 A directory must be created 
