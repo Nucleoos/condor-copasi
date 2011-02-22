@@ -42,7 +42,7 @@ See http://docs.djangoproject.com/en/1.2/howto/deployment/modwsgi/ for general d
 
   * Ensure Apache and mod_wsgi are installed and configured correctly
   * Create a directory to hold the web_frontend folder
-  {{{sudo mkdir /var/www/condor_copasi}}}
+  {{{sudo mkdir /var/www/condor-copasi}}}
   * Copy web_frontend folder to /var/www/condor-copasi
   {{{sudo cp -r path/to/web_frontend /var/www/condor-copasi}}}
   * Create a link to the Django admin media files in /var/www/condor-copasi
