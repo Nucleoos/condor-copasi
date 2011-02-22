@@ -22,12 +22,12 @@ Condor Copasi uses a database to store information on users and the jobs they ha
   * Oraclesudo ln -s
 Note that an appropriate python wrapper must also be installed.
 
-While all these databases should, in theory, work with Condor Copasi, note that we have only tested with PostgreSQL 8.4 with the [http://initd.org/psycopg/ psycopg2] Python adaptor.
+While all these databases should work with Condor Copasi, please note that we have only tested with PostgreSQL 8.4 with the [http://initd.org/psycopg/ psycopg2] Python adaptor.
 
 ===Configuring the database===
 A new database should be created, and  username and password should be set up to allow Condor Copasi to access this database. Refer to your database documentation for details on how to do this. Initially this user must have permission to create tables in the database, though after the database has been initially populated (see below), this privilege can be dropped. 
 
-Note that the database will be accessed by both the web frontend and the background daemon using the same database username/password combination. Depending on your system configuration, it is likely that the web server and background daemon will be running as different users, and so the database must be configured to accommodate this situation.
+Note that the database will be accessed by both the web frontend and the background daemon. Depending on your system configuration, it is likely that the web server and background daemon will be running as different users, though both will need to be able to log into the database using the same username/password combination, and so the database must be configured to accommodate this situation.
 
 In PostgreSQL, this involves changing the default local authentication method from ident to md5 in pg_hba.conf:
 {{{
@@ -36,9 +36,9 @@ host    all         all         127.0.0.1/32          md5
 }}}
 
 ==Web server setup==
-The web frontend can be run on any web server capable of running Django applications (see http://docs.djangoproject.com/en/1.2/howto/deployment/), though the Django documentation recommends Apache with the mod_wsgi Python interface. Condor Copasi ships with a configuration for Apache and mod_wsgi.
+The web frontend can be run on any web server capable of running Django applications (see http://docs.djangoproject.com/en/1.2/howto/deployment/), though the Django documentation recommends using Apache with the mod_wsgi Python interface. Condor Copasi ships with a preset configuration for Apache and mod_wsgi.
 
-See http://docs.djangoproject.com/en/1.2/howto/deployment/modwsgi/ for general details on deployment. See below for the steps involved using Ubuntu:
+See http://docs.djangoproject.com/en/1.2/howto/deployment/modwsgi/ for general details on deployment. The steps involved in deployment using Ubuntu are listed below:
 
   * Ensure Apache and mod_wsgi are installed and configured correctly
   * Create a directory to hold the web_frontend folder
