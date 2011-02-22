@@ -113,7 +113,25 @@ sudo adduser condor-copasi-user condor-copasi
 }}}
 
 ==Install the helper daemon==
-TODO: copy the helper daemon somewhere...
+Copy the `condor-copasi-daemon` folder to an appropriate location. E.g.
+{{{
+sudo cp -r condor-copasi-daemon /opt
+}}}
+And mark condor-copasi-daemon as executable
+{{{
+sudo chmod +x /opt/condor-copasi-daemon.py
+}}}
+
+===Optional - create a link in /usr/bin===
+For convenience, we can create a script in /usr/bin to automatically set up the necessary environmental variables and run the background daemon.
+
+For example, save the following code in /usr/bin/condor-copasi-daemon:
+{{{
+#!/bin/bash
+export PYTHONPATH=$PYTHONPATH:/var/www/condor-copasi:/var/www/condor-copasi/web_frontend:/opt/condor-copasi-daemon
+export DJANGO_SETTINGS_MODULE=web_frontend.settings
+/opt/condor-copasi-daemon/condor-copasi-daemon.py $@
+}}}
 
 ==Uploaded files directory==
 A directory must be created 
