@@ -102,7 +102,9 @@ The background daemon runs in addition to the web server, periodically checking 
 
 ==User and permissions setup==
 For security reasons, we recommend creating a new user to run the condor-copasi-daemon. E.g.:
-{{{adduser condor-copasi-user}}}
+{{{
+adduser condor-copasi-user
+}}}
 In addition to the new user, a new group should be created containing both the Condor Copasi daemon user and the web server user (e.g. condor-copasi-user and www-data). E.g.
 {{{
 sudo addgroup condor-copasi
