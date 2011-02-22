@@ -164,6 +164,9 @@ Assuming everything has been configured correctly, we can now create the require
 Both the {{{web_frontend}}} folder, and it's parent folder must be added to the python path. For example, if web_frontend is located in /var/www/condor-copasi:
 {{{
 export PYTHONPATH=$PYTHONPATH:/var/www/condor-copasi:/var/www/condor-copasi/web_frontend
+}}}
+And add the DJANGO_SETTINGS_MODULE environmental variable:
+{{{
 export DJANGO_SETTINGS_MODULE=web_frontend.settings
 }}}
 ===Run manage.py===
