@@ -176,6 +176,7 @@ CopasiSE.OSX.PPC
 CopasiSE.WINDOWS.INTEL
 CopasiSE.WINNT51.INTEL
     }}}
+Remember, the files in this directory must be executable by the condor-copasi-user!
   * Set COPASI_LOCAL_BINARY to the absolute path of the CopasiSE binary that is can be executed on the local machine. This must be executable by hte web server and background daemon
   * If necessary, change COMPLETED_JOB_DAYS, MIN_CONDOR_Q_POOL_TIME and IDEAL_JOB_TIME according to the descriptions given in settings.py
 
