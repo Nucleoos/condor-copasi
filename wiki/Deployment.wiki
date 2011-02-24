@@ -5,6 +5,9 @@ The Condor Copasi Web Frontend is written in Python as a [http://docs.djangoproj
 ==Python setup==
 Python 2.6 must be installed and configured.
 
+===LXML===
+The [http://lxml.de/tutorial.html LXML] package must be installed, and added to the python path.
+
 ==Django setup==
 Django version 1.2.4 or 1.2.5 must be installed and in the Python path. See http://www.djangoproject.com/download/ for details.
 
