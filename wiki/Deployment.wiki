@@ -36,7 +36,13 @@ A new database should be created, and  username and password should be set up to
 
 Note that the database will be accessed by both the web frontend and the background daemon. Depending on your system configuration, it is likely that the web server and background daemon will be running as different users, though both will need to be able to log into the database using the same username/password combination, and so the database must be configured to accommodate this situation.
 
-In PostgreSQL, this involves changing the default local authentication method from ident to md5 in pg_hba.conf:
+In PostgreSQL, this could involved changing the default local authentication method from ident to md5 in pg_hba.conf:
+*from:*
+{{{
+# IPv4 local connections:
+host    all         all         127.0.0.1/32          md5
+}}}
+*to:*
 {{{
 # IPv4 local connections:
 host    all         all         127.0.0.1/32          md5
