@@ -8,6 +8,10 @@ Python 2.6 must be installed and configured.
 ==Django setup==
 Django version 1.2.4 or 1.2.5 must be installed and in the Python path. See http://www.djangoproject.com/download/ for details.
 
+==Condor setup==
+Condor must be installed and configured as a submit node. Specifically, we must be able to submit jobs to the Condor pool by running `condor_submit`, and check the queue status by running `condor_q`.
+
+Condor Copasi has only been tested with Condor version 7.4.2
 
 
 =Web Frontend=
@@ -105,6 +109,9 @@ For security reasons, we recommend creating a new user to run the condor-copasi-
 {{{
 adduser condor-copasi-user
 }}}
+
+This user must have permission to submit jobs to the Condor pool by running `condor_submit` and to check on the Condor queue status by running `condor_q`.
+
 In addition to the new user, a new group should be created containing both the Condor Copasi daemon user and the web server user (e.g. condor-copasi-user and www-data). E.g.
 {{{
 sudo addgroup condor-copasi
