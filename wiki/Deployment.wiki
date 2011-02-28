@@ -1,3 +1,4 @@
+#labels Phase-Deploy,Featured
 The Condor Copasi Web Frontend is written in Python as a [http://docs.djangoproject.com/en/1.2/releases/1.2.4/ Django 1.2 Application]. In addition to the web frontend, a background daemon must be configured. This daemon periodically checks for new jobs to submit to condor, and checks on the status of jobs that have already been submitted.
 
 =General setup=
