@@ -1,4 +1,2 @@
-#summary One-sentence summary of this page.
-
 [Contents]
   [Some content]
