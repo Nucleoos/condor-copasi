@@ -9,6 +9,12 @@ Python 2.6 must be installed and configured.
 ====LXML====
 The [http://lxml.de/tutorial.html LXML] package must be installed, and added to the python path.
 
+====Matplotlib====
+To make use of the stochastic simulation plotting feature, the [http://matplotlib.sourceforge.net/ matplotlib] Python library must be installed and in the Python path.
+
+Condor-Copasi has only been tested with version 0.99.1.1
+
+
 ==Django setup==
 Django version 1.2.4 or 1.2.5 must be installed and in the Python path. See http://www.djangoproject.com/download/ for details.
 
@@ -255,3 +261,38 @@ or
 {{{
 sudo service apache2 restart
 }}}
+
+=Optional -- condor_submit username configuration=
+By default, Condor-Copasi will submit jobs to the Condor pool with the user running the condor-copasi-daemon as the owner.
+
+Condor-Copasi can optionally submit to the condor pool using the username of the Condor-Copasi user as the owner. To enable this feature, change `SUBMIT_WITH_USERNAMES` in settings.py to `True`.
+
+For this feature to work, the Condor-Copasi usernames must have user accounts on the server running the condor-copasi-daemon. *In addition, the user running condor-copasi-daemon must be able to use `sudo -u username` to execute the following commands as user username, without being prompted for a password:*
+{{{
+cp
+mv
+chmod
+chown
+rm
+condor_submit
+condor_rm
+}}}
+
+To achieve this, we recommend creating a new group condor-copasi-submitters
+{{{
+addgroup condor-copasi-submitters
+}}}
+
+And then adding the following lines to /etc/sudoers. (Note, under Ubuntu, and possibly other systems, /etc/sudoers must be edited by using the command `visudo`):
+{{{
+#Condor Copasi config
+Cmnd_Alias CONDOR_COPASI_COMMANDS = /bin/cp *, /bin/mv *, /bin/chgrp *, /bin/chmod g+w *, /bin/rm *, /usr/bin/condor_submit *, usr/bin/condor_rm *
+condor-copasi-user ALL = (%condor-copasi-submitters) NOPASSWD:NOEXEC: CONDOR_COPASI_COMMANDS
+}}}
+This allows the user condor-copasi-user to run the commands listed in `CONDOR_COPASI_COMMANDS` as any user in the group condor-copasi-submitters without being prompted for a password.
+
+When new users are added to the system, a corresponding user account with the same username must be created on the system. This can be performed as follows:
+{{{
+useradd -G condor-copasi, condor-copasi-submitters some_username
+}}}
+This creates a user with username some_username which is a member of the condor-copasi and condor-copasi-submitters groups (both are necessary). Note that no corresponding entry is added to /etc/passwd, which should mean that the only way to gain access to the account is via the `sudo` or `su` commands.
