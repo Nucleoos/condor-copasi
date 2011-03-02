@@ -2,13 +2,26 @@
 
 This page gives detailed information each of the tasks Condor-Copasi can perform, and details on how to prepare Copasi models for each task.
 
+All Copasi models should be saved using Build 33 or Build 34 of Copasi.
+
 ==Global Sensitivity Analysis / Sensitivity Optimization==
 ===Introduction===
+Condor-Copasi is able to automate and parallelize the global sensitivity analysis procedure, as described in the paper [http://www.ncbi.nlm.nih.gov/pubmed/18632455 A new strategy for assessing sensitivities in biochemical models].
+
 
 ===Model preparation===
 
-===Output===
+All parameters that you wish to vary should be added to the *Optimization* task, with initial values appropriate upper and lower bounds set.
 
+An appropriate optimization method, such as 'Particle Swarm' should also be set.
+
+In addition, the parameter you wish to calculate the sensitivities against (for example, the flux through a reaction, or the concentration of a metabolite) should be set as the Function the *Sensitivities* task as a Single Object.
+
+===Parallelization===
+Condor-Copasi will split this task up into two Condor jobs per parameter specified in the Optimization task.
+
+===Output===
+Condor-Copasi produces a tab-separated text file containing, for each parameter in the Optimization task, the maximum and minimum values found for the parameter specified in the Sensitivities task. In addition, information is returned on the amount of CPU time per job
 
 ==Stochastic Simulation==
 ===Introduction===
