@@ -44,13 +44,25 @@ Condor-Copasi will automatically calculate particle number means and standard de
 
 The output produced for each individual Time Course repeat is also available in the file `raw_results.txt`. This file is available by clicking 'Download results directory'.
 
+===Example File===
+[http://condor-copasi.googlecode.com/svn/wiki/examples/stochastic_test.cps Click here] to download an example model configured to run the Stochastic Simulation task.
+
 ==Parallel Scan==
 ===Introduction===
+Condor-Copasi will take a Parameter Scan set up in Copasi and automatically split it into smaller chunks to be run in parallel. In cases where multiple scan tasks/repeats are nested, only the the top-level scan will be split. The smaller chunks are then submitted to the Condor pool, and the results collated as if the scan task had been run on a single machine.
 
 ===Model preparation===
+The *Parameter Scan* task in Copasi should be set up as though the scan were to take place on the local machine. Unlike the other Condor-Copasi tasks, Parallel Scan requires that a report be set for the Parameter Scan task. This report must contain output you wish to generate. 
+
+
+===Parallelization===
+Like the Stochastic Simulation task, Condor-Copasi aims to split the Scan task into smaller jobs that can be run in parallel on the Condor pool, aiming to make each smaller job run for a constant length of time. If nested scans or repeats are set, only the top-level scan or repeat can be split. This should be taken into account when deciding on the order of the nested items.
 
 ===Output===
+Output is generated according to the report set for the Parameter Scan task. The output is collated as though the Parameter Scan task had been run on a single machine.
 
+===Example File===
+TODO
 
 ==Optimization Repeat==
 ===Introduction===
