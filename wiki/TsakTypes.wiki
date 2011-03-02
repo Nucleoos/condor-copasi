@@ -1,0 +1,50 @@
+=Condor-Copasi Tasks=
+
+This page gives detailed information each of the tasks Condor-Copasi can perform, and details on how to prepare Copasi models for each task.
+
+==Global Sensitivity Analysis / Sensitivity Optimization==
+===Introduction===
+
+===Model preparation===
+
+===Output===
+
+
+==Stochastic Simulation==
+===Introduction===
+
+===Model preparation===
+
+===Output===
+
+
+==Parallel Scan==
+===Introduction===
+
+===Model preparation===
+
+===Output===
+
+
+==Optimization Repeat==
+===Introduction===
+
+===Model preparation===
+
+===Output===
+
+
+==Parameter Estimation Repeat==
+===Introduction===
+
+===Model preparation===
+
+===Output===
+
+
+==Optimization Repeat with Different Alogorithms==
+===Introduction===
+
+===Model preparation===
+
+===Output===
