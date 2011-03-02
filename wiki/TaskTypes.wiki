@@ -66,23 +66,47 @@ TODO
 
 ==Optimization Repeat==
 ===Introduction===
+This feature runs the optimization task a set number of times, splitting into multiple parallel jobs where necessary. The best value from the multiple number of runs is extracted, though the results of every optimization run are available for download too if necessary.
 
 ===Model preparation===
+The Optimization task should be set up as though a single optimization was to take place on the local machine. All parameters should be set as necessary.
+===Parallelization===
+Like the Stochastic Simulation task, Condor-Copasi aims to split the Optimization Repeat task into a number of small jobs, each of which will be executed in parallel on the Condor pool. The number of repeats per job depends on the time taken to perform a single repeat.
 
 ===Output===
+Condor-Copasi will automatically create a report for each Optimization repeat containing the best optimization value and the values of all variable parameters. Condor-Copasi will then search the output files to find the best optimization value and associated parameter values.
 
+The output from each optimization repeat is available in the file `raw_results.txt`, which can be obtained by downloading the results directory.
 
 ==Parameter Estimation Repeat==
 ===Introduction===
+Similar to the optimization repeat task above, this feature runs the parameter estimation task multiple times, splitting into parallel jobs where necessary. The best set of parameters values are then selected, though the results of each parameter estimation run are available to download if necessary.
 
 ===Model preparation===
+The *Parameter Estimation* task should be set up as though a single parameter estimation was to take place on the local machine. All parameters should be set as necessary, and any experimental data imported. Note that, when importing experimental data, all data files should be located in the same directory on the local machine as the model file.
+
+===Parallelization===
+Like the Stochastic Simulation task, Condor-Copasi aims to split the Parameter Estimation Repeat task into a number of small jobs, each of which will be executed in parallel on the Condor pool. The number of repeats per job depends on the time taken to perform a single repeat.
 
 ===Output===
+Condor-Copasi will automatically create a report for each Parameter Estimation repeat containing the best objective value value and the values of all variable parameters. After all repeats have finished, Condor-Copasi will search the output files to find the best objective value and associated parameter values.
+
+The output from each optimization repeat is available in the file `raw_results.txt`, which can be obtained by downloading the results directory.
 
 
 ==Optimization Repeat with Different Alogorithms==
 ===Introduction===
+This feature runs the optimization task using different algorithms. Each algorithm runs as a separate parallel job. Condor-Copasi will automatically determine which algorithm(s) found the best result.
 
 ===Model preparation===
+The *Optimization* task should be configured as though a single optimization was to take place on the local machine. All parameters should be set as desired, except for those relating to the optimization algorithm, which will be set when submitting the model to Condor-Copasi.
+
+===Parallelization===
+Condor-Copasi creates a separate job to run on the Condor pool for each optimization algorithm.
 
 ===Output===
+Condor-Copasi will automatically create a report for the Optimization task containing the best optimization value, along with any associated variable parameter values.
+
+After each optimization algorithm has run on the Condor pool, Condor-Copasi will go through the output and find the best value(s) and associated variable parameter values, and will list these alongside the name of the algorithm(s) which found the result.
+
+The output for each optimization algorithm is available by downloading the results directory. Each output is named according to the name of the algorithm, e.g. `particle_swarm_out.txt`
