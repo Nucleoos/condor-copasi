@@ -1,2 +1,3 @@
+#sidebar None
 ==  * [Manual Condor-Copasi]==
     * ==[Manual#Introduction Introduction]==
