@@ -29,11 +29,20 @@ Condor-Copasi produces a tab-separated text file containing, for each parameter 
 
 ==Stochastic Simulation==
 ===Introduction===
+Condor-Copasi provides an easy to use environment for running multiple stochastic simulations. The simulations are automatically split into parallel jobs and run on the Condor pool. Once completed, the results are automatically collated, and particle number means and standard deviations calculated.
 
 ===Model preparation===
+The model should be prepared as if a single Time Course task were to run. A stochastic or hybrid algorithm should be selected, and all other parameters for the Time Course task set as desired.
+
+===Parallelization===
+Condor-Copasi will automatically split this task into a number of sub-jobs, each of which can be executed in parallel on the Condor pool. The number of repeats performed for each Condor job will depend on the time taken to simulate a single run of the Time Course task. Condor-Copasi aims to make each Stochastic Simulation job submitted to Condor run for a constant length of time. If a single stochastic run of the Time Course task takes longer than this time, then a single stochastic run will be performed for each Condor job.
+
+Typically, the running time of each job is set to be approximately equal to 20 minutes, but can be adjusted by the System Administrator. Note that, due to differences in the processing power of different machines in the Condor pool, the running time of individual jobs may vary considerably.
 
 ===Output===
+Condor-Copasi will automatically calculate particle number means and standard deviations for all species in the model at each time point. These are available to download as a tab-separated text file by clicking 'Download the results', and can be plotted by clicking 'View the results'.
 
+The output produced for each individual Time Course repeat is also available in the file `raw_results.txt`. This file is available by clicking 'Download results directory'.
 
 ==Parallel Scan==
 ===Introduction===
