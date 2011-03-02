@@ -1,3 +1,9 @@
 #sidebar None
-==  * [Manual Condor-Copasi]==
-    * ==[Manual#Introduction Introduction]==
+==  * [Instructions Condor-Copasi]==
+    * ===[Instructions#Introduction Introduction]===
+    * ===[Instructions#Usage Usage]===
+      * ====[Instructions#Log_In Getting started]====
+      * ====[Instructions#Submit_new_jobs Submitting new jobs]====
+      * ====[Instructions#Monitor_the_status_of_existing_jobs Monitor running jobs]====
+      * ====[Instructions#Process_job_output Process job output]====
+    
