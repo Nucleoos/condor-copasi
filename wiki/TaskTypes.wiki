@@ -18,10 +18,14 @@ An appropriate optimization method, such as 'Particle Swarm' should also be set.
 In addition, the parameter you wish to calculate the sensitivities against (for example, the flux through a reaction, or the concentration of a metabolite) should be set as the Function the *Sensitivities* task as a Single Object.
 
 ===Parallelization===
-Condor-Copasi will split this task up into two Condor jobs per parameter specified in the Optimization task.
+Condor-Copasi will split this task up into two Condor jobs per parameter specified in the Optimization task -- one job to minimize the sensitivity and one job to maximise it.
 
 ===Output===
-Condor-Copasi produces a tab-separated text file containing, for each parameter in the Optimization task, the maximum and minimum values found for the parameter specified in the Sensitivities task. In addition, information is returned on the amount of CPU time per job
+Condor-Copasi produces a tab-separated text file containing, for each parameter in the Optimization task, the maximum and minimum values found for the parameter specified in the Sensitivities task. In addition, information is returned on the amount of CPU time taken per optimization run, and the number of function evaluations taken by the optimization algorithm.
+
+===Example File===
+[http://condor-copasi.googlecode.com/svn/wiki/examples/SO%20Test%20(MAPK).cps Click here] to download an example model that has been configured to run the Sensitivity Optimization task.
+
 
 ==Stochastic Simulation==
 ===Introduction===
