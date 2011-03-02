@@ -62,7 +62,7 @@ Like the Stochastic Simulation task, Condor-Copasi aims to split the Scan task i
 Output is generated according to the report set for the Parameter Scan task. The output is collated as though the Parameter Scan task had been run on a single machine.
 
 ===Example File===
-TODO
+[http://condor-copasi.googlecode.com/svn/wiki/examples/parallel_scan.cps Click here] to download an example model configured to run the Parallel Scan task.
 
 ==Optimization Repeat==
 ===Introduction===
@@ -77,6 +77,8 @@ Like the Stochastic Simulation task, Condor-Copasi aims to split the Optimizatio
 Condor-Copasi will automatically create a report for each Optimization repeat containing the best optimization value and the values of all variable parameters. Condor-Copasi will then search the output files to find the best optimization value and associated parameter values.
 
 The output from each optimization repeat is available in the file `raw_results.txt`, which can be obtained by downloading the results directory.
+===Example File===
+[http://condor-copasi.googlecode.com/svn/wiki/examples/optimization_repeat.cps Click here] to download an example model configured to run the Optimization Repeat task.
 
 ==Parameter Estimation Repeat==
 ===Introduction===
@@ -93,6 +95,8 @@ Condor-Copasi will automatically create a report for each Parameter Estimation r
 
 The output from each optimization repeat is available in the file `raw_results.txt`, which can be obtained by downloading the results directory.
 
+===Example File===
+[http://condor-copasi.googlecode.com/svn/wiki/examples/KinMMFit.cps Click here] to download an example model configured to run the Parameter Estimation task, and the [http://condor-copasi.googlecode.com/svn/wiki/examples/KinMMFitData.zip associated data file].
 
 ==Optimization Repeat with Different Alogorithms==
 ===Introduction===
@@ -110,3 +114,6 @@ Condor-Copasi will automatically create a report for the Optimization task conta
 After each optimization algorithm has run on the Condor pool, Condor-Copasi will go through the output and find the best value(s) and associated variable parameter values, and will list these alongside the name of the algorithm(s) which found the result.
 
 The output for each optimization algorithm is available by downloading the results directory. Each output is named according to the name of the algorithm, e.g. `particle_swarm_out.txt`
+
+===Example File===
+[http://condor-copasi.googlecode.com/svn/wiki/examples/multiple_optimizations.cps Click here] to download an example model configured to run the Multiple Optimizations with Different Algorithms task.
