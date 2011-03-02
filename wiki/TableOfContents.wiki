@@ -1,2 +1,2 @@
-=  * [Instructions Instruction Manual]=
-    * ==[Usage#Introduction Introduction]==
+==  * [Manual Condor-Copasi]==
+    * ==[Manual#Introduction Introduction]==
