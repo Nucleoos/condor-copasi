@@ -1,9 +1,11 @@
 #sidebar None
-==  * [Instructions Condor-Copasi]==
+===  * [Instructions Condor-Copasi Manual]===
     * [Instructions#Introduction Introduction]
     * [Instructions#Usage Usage]
-      * ====[Instructions#Log_In Getting started]====
-      * ====[Instructions#Submit_new_jobs Submitting new jobs]====
-      * ====[Instructions#Monitor_the_status_of_existing_jobs Monitor running jobs]====
-      * ====[Instructions#Process_job_output Process job output]====
-    
+      * [Instructions#Log_In Getting started]
+      * [Instructions#Submit_new_jobs Submitting new jobs]
+      * [Instructions#Monitor_the_status_of_existing_jobs Monitor running jobs]
+      * [Instructions#Process_job_output Process job output]
+    * [TaskTypes Task Types]
+      * [TaskTypes#Sensitivity_Optimization Sensitivity Optimization / Global Sensitivity Analysis]
+    * Troubleshooting
