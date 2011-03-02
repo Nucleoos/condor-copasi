@@ -1,2 +1,1 @@
-[Contents]
-  [Some content]
+[Usage Usage]
