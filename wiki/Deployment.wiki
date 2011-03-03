@@ -171,7 +171,8 @@ For example, save the following code in /etc/init.d/condor-copasi-daemon:
 #Remember, must include the web_frontend folder, the folder above that, and the folder containing the daemon
 
 #Replace condor-copas-user with the username you wish to run the condor-copasi-daemon as
-sudo -u condor-copasi-user sh -c "export PYTHONPATH=$PYTHONPATH:/var/www/condor-copasi:/var/www/condor-copasi/web_frontend:/opt/condor-copasi-daemon; export DJANGO_SETTINGS_MODULE=web_frontend.settings; /opt/condor-copasi-daemon/condor-copasi-daemon.py $@"}}}
+sudo -u condor-copasi-user sh -c "export PYTHONPATH=$PYTHONPATH:/var/www/condor-copasi:/var/www/condor-copasi/web_frontend:/opt/condor-copasi-daemon; export DJANGO_SETTINGS_MODULE=web_frontend.settings; /opt/condor-copasi-daemon/condor-copasi-daemon.py $@"
+}}}
 And mark it as executable
 {{{
 sudo chmod +x /etc/init.d/condor-copasi-daemon
@@ -180,6 +181,15 @@ sudo chmod +x /etc/init.d/condor-copasi-daemon
 Under Ubuntu/Debian, the update-rc.d command can be used to automatically add the appropriate links so that the daemon automatically starts on boot:
 {{{
 sudo update-rc.d condor-copasi-daemon defaults
+}}}
+
+The daemon can now be started as follows:
+{{{
+sudo /etc/init.d/condor-copasi-daemon start
+}}}
+And stopped:
+{{{
+sudo /etc/init.d/condor-copasi-daemon stop
 }}}
 
 ==Uploaded files directory==
@@ -251,7 +261,12 @@ At this point, if required, CREATE_TABLE and DROP_TABLE privileges for the condo
 =Start the background daemon=
 With everything set up, we can now start the background daemon.
 
-Ensure that the Python path is correctly set, containing the following folders:
+If you added the script in /etc/init.d, the daemon can be started by running:
+{{{
+sudo /etc/init.d/condor-copasi-daemon start
+}}}
+
+Otherwise, ensure that the Python path is correctly set, containing the following folders:
   * web_frontend 
   * The web_frontend parent folder
   * The folder containing the background daemon
@@ -265,11 +280,11 @@ export DJANGO_SETTINGS_MODULE=web_frontend.settings
 }}}
 And start the daemon:
 {{{
-/path/to/daemon.py start
+/path/to/condor-copasi-daemon.py start
 }}}
 The daemon can then be stopped:
 {{{
-/path/to/daemon.py stop
+/path/to/condor-copasi-daemon.py stop
 }}}
 
 =Start Apache=
