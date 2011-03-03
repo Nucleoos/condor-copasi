@@ -7,8 +7,6 @@ Condor-Copasi is a web-based interface for integrating [http://www.copasi.org Co
 
 <wiki:toc max_depth="3" />
 
-=Usage=
-
 ==Log In==
 Before you can access Condor-Copasi you must have a user account created. Speak to you System Administrator for further details.
 
