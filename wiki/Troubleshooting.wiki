@@ -1,3 +1,16 @@
 #summary Diagnosing and fixing common problems
 
-=Automatically generated files=
+This page gives a few hints and tips on solving problems. It is not comprehensive, though should guide you in the right direction
+
+<wiki:toc max_depth="3" />
+
+=The model file could not be uploaded to Condor-Copasi=
+
+
+=The model file was uploaded, but the task failed before any jobs were submitted to Condor=
+
+=Jobs were submitted to Condor, but the task still failed=
+
+==Understanding the automatically generated files==
+
+=Reporting Bugs=
