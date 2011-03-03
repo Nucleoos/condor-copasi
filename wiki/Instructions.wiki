@@ -1,3 +1,4 @@
+#summary Instruction manual for using Condor-Copasi
 #labels Phase-Support,Featured
 =Introduction=
 Condor-Copasi is a web-based interface for integrating [http://www.copasi.org Copasi] with the [http://www.cs.wisc.edu/condor/ Condor] High Throughput Computing (HTC) environment. It provides Copasi users with a simple environment for utilising the power of High Throughput Computing, without requiring any technical knowledge of Condor of other HTC tools.
