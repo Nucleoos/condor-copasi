@@ -150,19 +150,36 @@ And mark condor-copasi-daemon as executable
 sudo chmod +x /opt/condor-copasi-daemon.py
 }}}
 
-===Optional - create a link in /usr/bin===
-For convenience, we can create a script in /usr/bin to automatically set up the necessary environmental variables and run the background daemon.
+===Optional - create a script in /etc/init.d===
+For convenience, we can create a script in /etc/init.d to automatically set up the necessary environmental variables and run the background daemon as the appropriate user.
 
-For example, save the following code in /usr/bin/condor-copasi-daemon:
+For example, save the following code in /etc/init.d/condor-copasi-daemon:
 {{{
 #!/bin/bash
-export PYTHONPATH=$PYTHONPATH:/var/www/condor-copasi:/var/www/condor-copasi/web_frontend:/opt/condor-copasi-daemon
-export DJANGO_SETTINGS_MODULE=web_frontend.settings
-/opt/condor-copasi-daemon/condor-copasi-daemon.py $@
-}}}
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          condor_copasi_daemon
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start condor copasi daemon
+# Description:       Enable service provided by condor-coapsi daemon.
+### END INIT INF
+
+#Fill in the appropriate locations in the PYTHONPATH below.
+#Remember, must include the web_frontend folder, the folder above that, and the folder containing the daemon
+
+#Replace condor-copas-user with the username you wish to run the condor-copasi-daemon as
+sudo -u condor-copasi-user sh -c "export PYTHONPATH=$PYTHONPATH:/var/www/condor-copasi:/var/www/condor-copasi/web_frontend:/opt/condor-copasi-daemon; export DJANGO_SETTINGS_MODULE=web_frontend.settings; /opt/condor-copasi-daemon/condor-copasi-daemon.py $@"}}}
 And mark it as executable
 {{{
-sudo chmod +x /usr/bin/condor-copasi-daemon
+sudo chmod +x /etc/init.d/condor-copasi-daemon
+}}}
+
+Under Ubuntu/Debian, the update-rc.d command can be used to automatically add the appropriate links so that the daemon automatically starts on boot:
+{{{
+sudo update-rc.d condor-copasi-daemon defaults
 }}}
 
 ==Uploaded files directory==
