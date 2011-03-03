@@ -1,0 +1,3 @@
+#summary Diagnosing and fixing common problems
+
+=Automatically generated files=
