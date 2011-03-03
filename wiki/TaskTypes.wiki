@@ -1,3 +1,4 @@
+#summary Detailed information on the tasks Condor-Copasi can perform
 =Condor-Copasi Tasks=
 
 This page gives detailed information each of the tasks Condor-Copasi can perform, and details on how to prepare Copasi models for each task.
