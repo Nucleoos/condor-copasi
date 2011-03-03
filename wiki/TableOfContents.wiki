@@ -8,4 +8,8 @@
       * [Instructions#Process_job_output Process job output]
     * [TaskTypes Task Types]
       * [TaskTypes#Global_Sensitivity_Analysis_/_Sensitivity_Optimization Global Sensitivity Analysis / Sensitivity Optimization]
+      * [TaskTypes#Parallel_Scan Parallel Scan]
+      * [TaskTypes#Optimization_Repeat Optimization Repeat]
+      * [TaskTypes#Parameter_Estimation_Repeat Parameter Estimation Repeat]
+      * [TaskTypes#Optimization_Repeat_with_Different_Alogorithms Optimization Repeat with Different Alogorithms]
     * Troubleshooting
