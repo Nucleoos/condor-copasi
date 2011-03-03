@@ -5,6 +5,8 @@ This page gives detailed information each of the tasks Condor-Copasi can perform
 
 All Copasi models should be saved using Build 33 or Build 34 of Copasi.
 
+<wiki:toc max_depth="2" />
+
 ==Global Sensitivity Analysis / Sensitivity Optimization==
 ===Introduction===
 Condor-Copasi is able to automate and parallelize the global sensitivity analysis procedure, as described in the paper [http://www.ncbi.nlm.nih.gov/pubmed/18632455 A new strategy for assessing sensitivities in biochemical models].
