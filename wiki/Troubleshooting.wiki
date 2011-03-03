@@ -14,7 +14,7 @@ Condor-Copasi will reject Copasi model files unless a number of criteria have be
 If you are sure the model file is correctly configured, it is possible that there is a bug in the Condor-Copasi software. Consider [#Reporting_Bugs filing a bug report].
 
 =The model file was uploaded, but the task failed before any jobs were submitted to Condor=
-If your job failed before any Condor jobs were submitted, the most likely cause is that the Copasi model was not set up correctly. Check the guidelines [The_model_file_could_not_be_uploaded_to_Condor-Copasi here].
+If your job failed before any Condor jobs were submitted, the most likely cause is that the Copasi model was not set up correctly. Check the guidelines [#The_model_file_could_not_be_uploaded_to_Condor-Copasi here].
 
 Also check that, when running a job that performs multiple repeats of a certain task, you can successfully run the task on your local machine.
 
