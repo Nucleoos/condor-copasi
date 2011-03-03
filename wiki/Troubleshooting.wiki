@@ -41,4 +41,4 @@ The file `raw_results.txt` contains the collated, unprocessed output from all th
 The file `results.txt` contains the processed output.
 
 =Reporting Bugs=
-If you think you have found a bug in Condor-Copasi, please report it using the [http://code.google.com/p/condor-copasi/issues/list Issue Tracker]. Include as much information as possible about the problem, if relevant, include the Copasi model file as an attachment.
+If you think you have found a bug in Condor-Copasi, please report it using the [http://code.google.com/p/condor-copasi/issues/list Issue Tracker]. Include as much information as possible about the problem, and if relevant, include the Copasi model file as an attachment.
