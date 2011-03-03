@@ -7,5 +7,5 @@
       * [Instructions#Monitor_the_status_of_existing_jobs Monitor running jobs]
       * [Instructions#Process_job_output Process job output]
     * [TaskTypes Task Types]
-      * [TaskTypes#Sensitivity_Optimization Sensitivity Optimization / Global Sensitivity Analysis]
+      * [TaskTypes#Global_Sensitivity_Analysis_/_Sensitivity_Optimization Global Sensitivity Analysis / Sensitivity Optimization]
     * Troubleshooting
