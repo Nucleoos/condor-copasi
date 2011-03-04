@@ -202,8 +202,10 @@ sudo chmod g+rws /var/www/condor-copasi/user-files
 
 ==Configure the Web Server Umask==
 Although we have now created a folder that has the appropriate group permissions, by default, any directories and files added by Apache will not be group writeable. To fix this, change the default umask for Apache to 002 (add the following line to /etc/apache2/envvars and restart Apache):
-{{{umask 002}}}
-*TODO: does this present a security risk? Is there a better way of doing this?*
+{{{
+umask 002
+}}}
+
 ==Logging setup==
 The helper deamon must be able to write to a log file. We recommend creating a folder in /var/log that is writeable by the condor-copasi group. We can then configure Condor-COPASI to write logs to this directory (see below):
 {{{
