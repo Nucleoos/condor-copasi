@@ -156,7 +156,6 @@ For convenience, we can create a script in /etc/init.d to automatically set up t
 For example, save the following code in /etc/init.d/condor-copasi-daemon:
 {{{
 #!/bin/bash
-#!/bin/bash
 ### BEGIN INIT INFO
 # Provides:          condor_copasi_daemon
 # Required-Start:    $all
@@ -165,7 +164,7 @@ For example, save the following code in /etc/init.d/condor-copasi-daemon:
 # Default-Stop:      0 1 6
 # Short-Description: Start condor copasi daemon
 # Description:       Enable service provided by condor-coapsi daemon.
-### END INIT INF
+### END INIT INFO
 
 #Fill in the appropriate locations in the PYTHONPATH below.
 #Remember, must include the web_frontend folder, the folder above that, and the folder containing the daemon
