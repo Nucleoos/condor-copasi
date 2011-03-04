@@ -1,5 +1,5 @@
 #sidebar None
-===  * [Instructions Condor-Copasi Manual]===
+===  * [Instructions Condor-COPASI Manual]===
     * [Instructions#Introduction Introduction]
     * [Instructions#Usage Usage]
       * [Instructions#Log_In Getting started]

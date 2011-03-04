@@ -1,15 +1,15 @@
-#summary Detailed information on the tasks Condor-Copasi can perform
-=Condor-Copasi Tasks=
+#summary Detailed information on the tasks Condor-COPASI can perform
+=Condor-COPASI Tasks=
 
-This page gives detailed information each of the tasks Condor-Copasi can perform, and details on how to prepare Copasi models for each task.
+This page gives detailed information each of the tasks Condor-COPASI can perform, and details on how to prepare COPASI models for each task.
 
-All Copasi models should be saved using Build 33 or Build 34 of Copasi.
+All COPASI models should be saved using Build 33 or Build 34 of COPASI.
 
 <wiki:toc max_depth="2" />
 
 ==Global Sensitivity Analysis / Sensitivity Optimization==
 ===Introduction===
-Condor-Copasi is able to automate and parallelize the global sensitivity analysis procedure, as described in the paper [http://www.ncbi.nlm.nih.gov/pubmed/18632455 A new strategy for assessing sensitivities in biochemical models].
+Condor-COPASI is able to automate and parallelize the global sensitivity analysis procedure, as described in the paper [http://www.ncbi.nlm.nih.gov/pubmed/18632455 A new strategy for assessing sensitivities in biochemical models].
 
 
 ===Model preparation===
@@ -21,10 +21,10 @@ An appropriate optimization method, such as 'Particle Swarm' should also be set.
 In addition, the parameter you wish to calculate the sensitivities against (for example, the flux through a reaction, or the concentration of a metabolite) should be set as the Function the *Sensitivities* task as a Single Object.
 
 ===Parallelization===
-Condor-Copasi will split this task up into two Condor jobs per parameter specified in the Optimization task -- one job to minimize the sensitivity and one job to maximise it.
+Condor-COPASI will split this task up into two Condor jobs per parameter specified in the Optimization task -- one job to minimize the sensitivity and one job to maximise it.
 
 ===Output===
-Condor-Copasi produces a tab-separated text file containing, for each parameter in the Optimization task, the maximum and minimum values found for the parameter specified in the Sensitivities task. In addition, information is returned on the amount of CPU time taken per optimization run, and the number of function evaluations taken by the optimization algorithm.
+Condor-COPASI produces a tab-separated text file containing, for each parameter in the Optimization task, the maximum and minimum values found for the parameter specified in the Sensitivities task. In addition, information is returned on the amount of CPU time taken per optimization run, and the number of function evaluations taken by the optimization algorithm.
 
 ===Example File===
 [http://condor-copasi.googlecode.com/svn/wiki/examples/SO%20Test%20(MAPK).cps Click here] to download an example model that has been configured to run the Sensitivity Optimization task.
@@ -32,18 +32,18 @@ Condor-Copasi produces a tab-separated text file containing, for each parameter 
 
 ==Stochastic Simulation==
 ===Introduction===
-Condor-Copasi provides an easy to use environment for running multiple stochastic simulations. The simulations are automatically split into parallel jobs and run on the Condor pool. Once completed, the results are automatically collated, and particle number means and standard deviations calculated.
+Condor-COPASI provides an easy to use environment for running multiple stochastic simulations. The simulations are automatically split into parallel jobs and run on the Condor pool. Once completed, the results are automatically collated, and particle number means and standard deviations calculated.
 
 ===Model preparation===
 The model should be prepared as if a single Time Course task were to run. A stochastic or hybrid algorithm should be selected, and all other parameters for the Time Course task set as desired.
 
 ===Parallelization===
-Condor-Copasi will automatically split this task into a number of sub-jobs, each of which can be executed in parallel on the Condor pool. The number of repeats performed for each Condor job will depend on the time taken to simulate a single run of the Time Course task. Condor-Copasi aims to make each Stochastic Simulation job submitted to Condor run for a constant length of time. If a single stochastic run of the Time Course task takes longer than this time, then a single stochastic run will be performed for each Condor job.
+Condor-COPASI will automatically split this task into a number of sub-jobs, each of which can be executed in parallel on the Condor pool. The number of repeats performed for each Condor job will depend on the time taken to simulate a single run of the Time Course task. Condor-COPASI aims to make each Stochastic Simulation job submitted to Condor run for a constant length of time. If a single stochastic run of the Time Course task takes longer than this time, then a single stochastic run will be performed for each Condor job.
 
 Typically, the running time of each job is set to be approximately equal to 20 minutes, but can be adjusted by the System Administrator. Note that, due to differences in the processing power of different machines in the Condor pool, the running time of individual jobs may vary considerably.
 
 ===Output===
-Condor-Copasi will automatically calculate particle number means and standard deviations for all species in the model at each time point. These are available to download as a tab-separated text file by clicking 'Download the results', and can be plotted by clicking 'View the results'.
+Condor-COPASI will automatically calculate particle number means and standard deviations for all species in the model at each time point. These are available to download as a tab-separated text file by clicking 'Download the results', and can be plotted by clicking 'View the results'.
 
 The output produced for each individual Time Course repeat is also available in the file `raw_results.txt`. This file is available by clicking 'Download results directory'.
 
@@ -52,14 +52,14 @@ The output produced for each individual Time Course repeat is also available in 
 
 ==Parallel Scan==
 ===Introduction===
-Condor-Copasi will take a Parameter Scan set up in Copasi and automatically split it into smaller chunks to be run in parallel. In cases where multiple scan tasks/repeats are nested, only the the top-level scan will be split. The smaller chunks are then submitted to the Condor pool, and the results collated as if the scan task had been run on a single machine.
+Condor-COPASI will take a Parameter Scan set up in COPASI and automatically split it into smaller chunks to be run in parallel. In cases where multiple scan tasks/repeats are nested, only the the top-level scan will be split. The smaller chunks are then submitted to the Condor pool, and the results collated as if the scan task had been run on a single machine.
 
 ===Model preparation===
-The *Parameter Scan* task in Copasi should be set up as though the scan were to take place on the local machine. Unlike the other Condor-Copasi tasks, Parallel Scan requires that a report be set for the Parameter Scan task. This report must contain output you wish to generate. 
+The *Parameter Scan* task in COPASI should be set up as though the scan were to take place on the local machine. Unlike the other Condor-COPASI tasks, Parallel Scan requires that a report be set for the Parameter Scan task. This report must contain output you wish to generate. 
 
 
 ===Parallelization===
-Like the Stochastic Simulation task, Condor-Copasi aims to split the Scan task into smaller jobs that can be run in parallel on the Condor pool, aiming to make each smaller job run for a constant length of time. If nested scans or repeats are set, only the top-level scan or repeat can be split. This should be taken into account when deciding on the order of the nested items.
+Like the Stochastic Simulation task, Condor-COPASI aims to split the Scan task into smaller jobs that can be run in parallel on the Condor pool, aiming to make each smaller job run for a constant length of time. If nested scans or repeats are set, only the top-level scan or repeat can be split. This should be taken into account when deciding on the order of the nested items.
 
 ===Output===
 Output is generated according to the report set for the Parameter Scan task. The output is collated as though the Parameter Scan task had been run on a single machine.
@@ -74,10 +74,10 @@ This feature runs the optimization task a set number of times, splitting into mu
 ===Model preparation===
 The Optimization task should be set up as though a single optimization was to take place on the local machine. All parameters should be set as necessary.
 ===Parallelization===
-Like the Stochastic Simulation task, Condor-Copasi aims to split the Optimization Repeat task into a number of small jobs, each of which will be executed in parallel on the Condor pool. The number of repeats per job depends on the time taken to perform a single repeat.
+Like the Stochastic Simulation task, Condor-COPASI aims to split the Optimization Repeat task into a number of small jobs, each of which will be executed in parallel on the Condor pool. The number of repeats per job depends on the time taken to perform a single repeat.
 
 ===Output===
-Condor-Copasi will automatically create a report for each Optimization repeat containing the best optimization value and the values of all variable parameters. Condor-Copasi will then search the output files to find the best optimization value and associated parameter values.
+Condor-COPASI will automatically create a report for each Optimization repeat containing the best optimization value and the values of all variable parameters. Condor-COPASI will then search the output files to find the best optimization value and associated parameter values.
 
 The output from each optimization repeat is available in the file `raw_results.txt`, which can be obtained by downloading the results directory.
 ===Example File===
@@ -91,10 +91,10 @@ Similar to the optimization repeat task above, this feature runs the parameter e
 The *Parameter Estimation* task should be set up as though a single parameter estimation was to take place on the local machine. All parameters should be set as necessary, and any experimental data imported. Note that, when importing experimental data, all data files should be located in the same directory on the local machine as the model file.
 
 ===Parallelization===
-Like the Stochastic Simulation task, Condor-Copasi aims to split the Parameter Estimation Repeat task into a number of small jobs, each of which will be executed in parallel on the Condor pool. The number of repeats per job depends on the time taken to perform a single repeat.
+Like the Stochastic Simulation task, Condor-COPASI aims to split the Parameter Estimation Repeat task into a number of small jobs, each of which will be executed in parallel on the Condor pool. The number of repeats per job depends on the time taken to perform a single repeat.
 
 ===Output===
-Condor-Copasi will automatically create a report for each Parameter Estimation repeat containing the best objective value value and the values of all variable parameters. After all repeats have finished, Condor-Copasi will search the output files to find the best objective value and associated parameter values.
+Condor-COPASI will automatically create a report for each Parameter Estimation repeat containing the best objective value value and the values of all variable parameters. After all repeats have finished, Condor-COPASI will search the output files to find the best objective value and associated parameter values.
 
 The output from each optimization repeat is available in the file `raw_results.txt`, which can be obtained by downloading the results directory.
 
@@ -103,18 +103,18 @@ The output from each optimization repeat is available in the file `raw_results.t
 
 ==Optimization Repeat with Different Alogorithms==
 ===Introduction===
-This feature runs the optimization task using different algorithms. Each algorithm runs as a separate parallel job. Condor-Copasi will automatically determine which algorithm(s) found the best result.
+This feature runs the optimization task using different algorithms. Each algorithm runs as a separate parallel job. Condor-COPASI will automatically determine which algorithm(s) found the best result.
 
 ===Model preparation===
-The *Optimization* task should be configured as though a single optimization was to take place on the local machine. All parameters should be set as desired, except for those relating to the optimization algorithm, which will be set when submitting the model to Condor-Copasi.
+The *Optimization* task should be configured as though a single optimization was to take place on the local machine. All parameters should be set as desired, except for those relating to the optimization algorithm, which will be set when submitting the model to Condor-COPASI.
 
 ===Parallelization===
-Condor-Copasi creates a separate job to run on the Condor pool for each optimization algorithm.
+Condor-COPASI creates a separate job to run on the Condor pool for each optimization algorithm.
 
 ===Output===
-Condor-Copasi will automatically create a report for the Optimization task containing the best optimization value, along with any associated variable parameter values.
+Condor-COPASI will automatically create a report for the Optimization task containing the best optimization value, along with any associated variable parameter values.
 
-After each optimization algorithm has run on the Condor pool, Condor-Copasi will go through the output and find the best value(s) and associated variable parameter values, and will list these alongside the name of the algorithm(s) which found the result.
+After each optimization algorithm has run on the Condor pool, Condor-COPASI will go through the output and find the best value(s) and associated variable parameter values, and will list these alongside the name of the algorithm(s) which found the result.
 
 The output for each optimization algorithm is available by downloading the results directory. Each output is named according to the name of the algorithm, e.g. `particle_swarm_out.txt`
 

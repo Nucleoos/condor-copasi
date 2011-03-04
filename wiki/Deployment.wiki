@@ -1,9 +1,9 @@
-#summary Information for system administrators on deploying Condor-Copasi
+#summary Information for system administrators on deploying Condor-COPASI
 #labels Phase-Deploy,Featured
 
-*This page is intended to provide information for those wishing to install Condor-Copasi on their own server. For information on using the Condor-Copasi web interface, see the [Instructions Instruction Manual] Wiki page.*
+*This page is intended to provide information for those wishing to install Condor-COPASI on their own server. For information on using the Condor-COPASI web interface, see the [Instructions Instruction Manual] Wiki page.*
 
-The Condor Copasi Web Frontend is written in Python as a [http://docs.djangoproject.com/en/1.2/releases/1.2.4/ Django 1.2 Application]. In addition to the web frontend, a background daemon must be configured. This daemon periodically checks for new jobs to submit to condor, and checks on the status of jobs that have already been submitted.
+The Condor-COPASI Web Frontend is written in Python as a [http://docs.djangoproject.com/en/1.2/releases/1.2.4/ Django 1.2 Application]. In addition to the web frontend, a background daemon must be configured. This daemon periodically checks for new jobs to submit to condor, and checks on the status of jobs that have already been submitted.
 
 =General setup=
 
@@ -16,7 +16,7 @@ The [http://lxml.de/tutorial.html LXML] package must be installed, and added to 
 ====Matplotlib====
 To make use of the stochastic simulation plotting feature, the [http://matplotlib.sourceforge.net/ matplotlib] Python library must be installed and in the Python path.
 
-Condor-Copasi has only been tested with version 0.99.1.1
+Condor-COPASI has only been tested with version 0.99.1.1
 
 
 ==Django setup==
@@ -25,7 +25,7 @@ Django version 1.2.4 or 1.2.5 must be installed and in the Python path. See http
 ==Condor setup==
 Condor must be installed and configured as a submit node. Specifically, we must be able to submit jobs to the Condor pool by running `condor_submit`, and check the queue status by running `condor_q`.
 
-Condor Copasi has only been tested with Condor version 7.4.2
+Condor COPASI has only been tested with Condor version 7.4.2
 
 
 =Web Frontend=
@@ -33,17 +33,17 @@ Deployment involves a few additional steps in addition to the standard Django ap
 
 
 ==Database setup==
-Condor Copasi uses a database to store information on users and the jobs they have submitted. Django supports a number of different databases (see http://docs.djangoproject.com/en/1.2/ref/databases/), including:
+Condor COPASI uses a database to store information on users and the jobs they have submitted. Django supports a number of different databases (see http://docs.djangoproject.com/en/1.2/ref/databases/), including:
   * PostgreSQL
   * MySQL
   * SQLite
   * Oracle
 Note that an appropriate python wrapper must also be installed.
 
-While all these databases should work with Condor Copasi, please note that we have only tested with PostgreSQL 8.4 with the [http://initd.org/psycopg/ psycopg2] Python adaptor.
+While all these databases should work with Condor COPASI, please note that we have only tested with PostgreSQL 8.4 with the [http://initd.org/psycopg/ psycopg2] Python adaptor.
 
 ===Configuring the database===
-A new database should be created, and  username and password should be set up to allow Condor Copasi to access this database. Refer to your database documentation for details on how to do this. Initially this user must have permission to create tables in the database, though after the database has been initially populated (see below), this privilege can be dropped. 
+A new database should be created, and  username and password should be set up to allow Condor COPASI to access this database. Refer to your database documentation for details on how to do this. Initially this user must have permission to create tables in the database, though after the database has been initially populated (see below), this privilege can be dropped. 
 
 Note that the database will be accessed by both the web frontend and the background daemon. Depending on your system configuration, it is likely that the web server and background daemon will be running as different users, though both will need to be able to log into the database using the same username/password combination, and so the database must be configured to accommodate this situation.
 
@@ -61,7 +61,7 @@ host    all         all         127.0.0.1/32          md5
 }}}
 
 ==Web server setup==
-The web frontend can be run on any web server capable of running Django applications (see http://docs.djangoproject.com/en/1.2/howto/deployment/), though the Django documentation recommends using Apache with the mod_wsgi Python interface. Condor Copasi ships with a preset configuration for Apache and mod_wsgi.
+The web frontend can be run on any web server capable of running Django applications (see http://docs.djangoproject.com/en/1.2/howto/deployment/), though the Django documentation recommends using Apache with the mod_wsgi Python interface. Condor COPASI ships with a preset configuration for Apache and mod_wsgi.
 
 See http://docs.djangoproject.com/en/1.2/howto/deployment/modwsgi/ for general details on deployment. The steps involved in deployment using Ubuntu are listed below:
 
@@ -133,7 +133,7 @@ adduser condor-copasi-user
 
 This user must have permission to submit jobs to the Condor pool by running `condor_submit` and to check on the Condor queue status by running `condor_q`.
 
-In addition to the new user, a new group should be created containing both the Condor Copasi daemon user and the web server user (e.g. condor-copasi-user and www-data). E.g.
+In addition to the new user, a new group should be created containing both the Condor COPASI daemon user and the web server user (e.g. condor-copasi-user and www-data). E.g.
 {{{
 sudo addgroup condor-copasi
 sudo adduser www-data condor-copasi
@@ -206,7 +206,7 @@ Although we have now created a folder that has the appropriate group permissions
 {{{umask 002}}}
 *TODO: does this present a security risk? Is there a better way of doing this?*
 ==Logging setup==
-The helper deamon must be able to write to a log file. We recommend creating a folder in /var/log that is writeable by the condor-copasi group. We can then configure Condor Copasi to write logs to this directory (see below):
+The helper deamon must be able to write to a log file. We recommend creating a folder in /var/log that is writeable by the condor-copasi group. We can then configure Condor-COPASI to write logs to this directory (see below):
 {{{
 sudo mkdir /var/log/condor-copasi
 sudo chgrp condor-copasi /var/log/condor-copasi
@@ -214,8 +214,8 @@ sudo chmod g+rws /var/log/condor-copasi
 }}}
 
 
-=Configure Condor-Copasi=
-With the Web Frontend and Background Daemon installed and set up, Condor Copasi must now be configured. The configuration file {{{settings.py}}} is located in the {{{web_frontend}}} directory (in the example configuration above, this is located in {{{/var/www/condor-copasi}}}).
+=Configure Condor-COPASI=
+With the Web Frontend and Background Daemon installed and set up, Condor COPASI must now be configured. The configuration file {{{settings.py}}} is located in the {{{web_frontend}}} directory (in the example configuration above, this is located in {{{/var/www/condor-copasi}}}).
   * Set the database engine, database name, username and password. Host and port can be left blank if the database is running on the local server.
   * Change the secret key to a random string
   * Set SITE_SUBFOLDER to the folder at which the web server is serving the web frontend, e.g. {{{'/condor-copasi/'}}} if the web frontend is being served at {{{www.example.com/condor-copasi}}}. If serving at the root folder, set to {{{'/'}}}
@@ -299,11 +299,11 @@ sudo service apache2 restart
 }}}
 
 =Optional -- condor_submit username configuration=
-By default, Condor-Copasi will submit jobs to the Condor pool with the user running the condor-copasi-daemon as the owner.
+By default, Condor-COPASI will submit jobs to the Condor pool with the user running the condor-copasi-daemon as the owner.
 
-Condor-Copasi can optionally submit to the condor pool using the username of the Condor-Copasi user as the owner. To enable this feature, change `SUBMIT_WITH_USERNAMES` in settings.py to `True`.
+Condor-COPASI can optionally submit to the condor pool using the username of the Condor-COPASI user as the owner. To enable this feature, change `SUBMIT_WITH_USERNAMES` in settings.py to `True`.
 
-For this feature to work, the Condor-Copasi usernames must have user accounts on the server running the condor-copasi-daemon. *In addition, the user running condor-copasi-daemon must be able to use `sudo -u username` to execute the following commands as user username, without being prompted for a password:*
+For this feature to work, the Condor-COPASI usernames must have user accounts on the server running the condor-copasi-daemon. *In addition, the user running condor-copasi-daemon must be able to use `sudo -u username` to execute the following commands as user username, without being prompted for a password:*
 {{{
 cp
 mv
@@ -321,7 +321,7 @@ addgroup condor-copasi-submitters
 
 And then adding the following lines to /etc/sudoers. (Note, under Ubuntu, and possibly other systems, /etc/sudoers must be edited by using the command `visudo`):
 {{{
-#Condor Copasi config
+#Condor COPASI config
 Cmnd_Alias CONDOR_COPASI_COMMANDS = /bin/cp *, /bin/mv *, /bin/chgrp *, /bin/chmod g+w *, /bin/rm *, /usr/bin/condor_submit *, usr/bin/condor_rm *
 condor-copasi-user ALL = (%condor-copasi-submitters) NOPASSWD:NOEXEC: CONDOR_COPASI_COMMANDS
 }}}
