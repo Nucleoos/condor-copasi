@@ -329,6 +329,6 @@ This allows the user condor-copasi-user to run the commands listed in `CONDOR_CO
 
 When new users are added to the system, a corresponding user account with the same username must be created on the system. This can be performed as follows:
 {{{
-useradd -G condor-copasi, condor-copasi-submitters some_username
+useradd -G condor-copasi,condor-copasi-submitters some_username
 }}}
 This creates a user with username some_username which is a member of the condor-copasi and condor-copasi-submitters groups (both are necessary). Note that no corresponding entry is added to /etc/passwd, which should mean that the only way to gain access to the account is via the `sudo` or `su` commands.
