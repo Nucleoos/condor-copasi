@@ -331,4 +331,4 @@ When new users are added to the system, a corresponding user account with the sa
 {{{
 useradd -G condor-copasi,condor-copasi-submitters some_username
 }}}
-This creates a user with username some_username which is a member of the condor-copasi and condor-copasi-submitters groups (both are necessary). Note that no corresponding entry is added to /etc/passwd, which should mean that the only way to gain access to the account is via the `sudo` or `su` commands.
+This creates a user with username some_username which is a member of the condor-copasi and condor-copasi-submitters groups (both are necessary). Note that no corresponding entry is added to /etc/shadow, which should mean that the only way to gain access to the account is via the `sudo` or `su` commands.
