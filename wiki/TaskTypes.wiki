@@ -62,7 +62,7 @@ The *Parameter Scan* task in COPASI should be set up as though the scan were to 
 Like the Stochastic Simulation task, Condor-COPASI aims to split the Scan task into smaller jobs that can be run in parallel on the Condor pool, aiming to make each smaller job run for a constant length of time. If nested scans or repeats are set, only the top-level scan or repeat can be split. This should be taken into account when deciding on the order of the nested items.
 
 ===Output===
-Output is generated according to the report set for the Parameter Scan task. The output is collated as though the Parameter Scan task had been run on a single machine.
+Output is generated according to the report set for the Parameter Scan task. *You must set this up manually using COPASI*. The output is collated as though the Parameter Scan task had been run on a single machine.
 
 ===Example File===
 [http://condor-copasi.googlecode.com/svn/wiki/examples/parallel_scan.cps Click here] to download an example model configured to run the Parallel Scan task.
