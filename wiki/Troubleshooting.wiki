@@ -24,7 +24,7 @@ If you still can't get the job to run, you may have found a bug in Condor-COPASI
 In this situation, examining the log files for the Condor jobs should give information about why the job(s) failed.
 
 ==Understanding the automatically generated files==
-Condor-COPASI automatically generates a number of files associated with each Job submitted to condor. The can be obtained by downloading the `.tar.gz` file of the results directory.
+Condor-COPASI automatically generates a number of files associated with each Job submitted to condor. The can be obtained by downloading the `.tar.bz2` file of the results directory.
 
 For each job submitted to Condor, the associated files are named as follows:
 || *Filename* || *Description* ||
