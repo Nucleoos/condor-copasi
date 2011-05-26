@@ -96,6 +96,12 @@ Like the Stochastic Simulation task, Condor-COPASI aims to split the Parameter E
 ===Output===
 Condor-COPASI will automatically create a report for each Parameter Estimation repeat containing the best objective value value and the values of all variable parameters. After all repeats have finished, Condor-COPASI will search the output files to find the best objective value and associated parameter values.
 
+Alternatively, by checking the appropriate box when submitting the task, a custom report can be used. This must be created manually using COPASI, and set for the Parameter Estimation task. Condor-COPASI will try to process the output from any custom report; for this to succeed, the following fields must be placed (in order) at the end of the report:
+  * {{{TaskList[ParameterEstimation].(Problem)Parameter Estimation.Best Parameters}}}
+  * {{{TaskList[ParameterEstimation].(Problem)Parameter Estimation.Best Value}}}
+  * {{{TaskList[ParameterEstimation].(Problem)Parameter Estimation.(Timer)CPU Time}}}
+  * {{{TaskList[ParameterEstimation].(Problem)Parameter Estimation.Function Evaluations}}}
+
 The output from each optimization repeat is available in the file `raw_results.txt`, which can be obtained by downloading the results directory.
 
 ===Example File===
