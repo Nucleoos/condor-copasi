@@ -5,6 +5,11 @@ This page gives detailed information each of the tasks Condor-COPASI can perform
 
 All COPASI models should be saved using Build 33 or Build 34 of COPASI.
 
+===Rank===
+As of version 0.4, all jobs can now be assigned a custom rank. The rank expression allows for jobs to prioritize certain machines when being assigned. For full details see the [http://research.cs.wisc.edu/condor/manual/v7.4/4_1Condor_s_ClassAd.html#classad-reference Condor manual]. *Note that an invalid rank expression can result in Condor jobs failing to submit, and the task failing*.
+
+
+===Task types===
 <wiki:toc max_depth="2" />
 
 ==Global Sensitivity Analysis / Sensitivity Optimization==
