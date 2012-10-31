@@ -1,0 +1,74 @@
+{# Root HTML template #}
+{% autoescape on %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<title>
+Condor-COPASI Web Frontend - {% block title %} {{ pageTitle }} {% endblock %}
+</title>
+<link rel="stylesheet" type="text/css" href="http://{{ host }}/{% if subfolder %}{{subfolder}}/{% endif %}{{static_url}}/style.css"> 
+{%block head%}
+{% endblock %}
+</head>
+
+<body {% block bodyattrs%}{%endblock%}>
+<div id="container">
+    <div id="wrapper">
+        <div id="header">
+            <div id="branding">
+                <a href="{% url index %}">Condor-COPASI</a>
+            </div>
+            <div id="user_tools">
+                {% if request.user.is_authenticated %}
+                Welcome <b> {{ request.user.username }} </b> | 
+                {% if request.user.is_staff %}
+                <a href="{% url admin:index %}">Administration</a> |
+                {% endif %}
+                <a href="{% url web_frontend.views.logoutPage %}">Logout</a>
+                {% else %}
+                <a href="{% url web_frontend.views.loginPage %}">Login</a>
+                {% endif %}
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="breadcrumbs">
+            <a href="{% url web_frontend.views.mainPage %}">Home</a> &gt;&gt;
+            {% block breadcrumbs_l2 %}{% endblock %}
+        </div>
+        <div id="main">
+            <div id="sidebar">
+            {% block sidebar %}
+                <ul>
+                    <li><a href="{% url web_frontend.views.mainPage %}">Home</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url web_frontend.condor_copasi_db.views.myAccount %}">My Account</a></li>
+                    {% block accountlist %}{% endblock %}
+                    <li><a href="{% url web_frontend.condor_copasi_db.views.tasks %}">Tasks</a></li>
+                    {% block tasklist %}{% endblock %}
+                    <li><a href="{% url usage_home %}">Usage Statistics</a></li>                    {% block usagelist %}{% endblock %}
+                    {%endif%}
+                    <li><a href="{% url help %}">Help</a></li>
+                </ul>
+            {% endblock %}
+            </div>
+            <div id="content">    
+                {% if message %}
+                    <div class="message">
+                    {{message}}
+                    </div>
+                {% endif %}
+                <h1>{{ pageTitle }}</h1>
+                {% block body %}
+                Body text
+                {% endblock %}
+            </div>    
+        </div>
+    </div>
+    <div id="footer">
+        Condor-COPASI Web Frontend, version {{version}}.
+    </div>
+</div>
+</body>
+</html>
+{% endautoescape %}

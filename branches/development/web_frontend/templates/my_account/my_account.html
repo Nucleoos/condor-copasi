@@ -1,0 +1,27 @@
+{% extends "default.html" %}
+
+{% block breadcrumbs_l2 %} <a href="{% url my_account %}">My Account</a> &gt;&gt; {% block breadcrumbs_l3 %}{%endblock%}{%endblock%}
+
+{% block accountlist %}
+<ul>
+    <li><a href="{% url running_jobs %}">Running Jobs <b>({{submitted_job_count}})</b></a></li>
+    <li><a href="{% url completed_jobs %}">Completed Jobs <b>({{completed_job_count}})</b></a></li>
+    <li><a href="{% url job_errors %}">Errors <b>({{error_count}})</b></a></li>
+    <li><a href="{% url change_password %}">Change password</a></li>
+</ul>
+{% endblock %}
+
+{%block body %}
+
+<p>Select an option from the menu on the left:</p>
+<ul>
+    <li><b>Running Jobs</b> lists newly submitted jobs awaiting submission to the Condor pool, and jobs still running on the Condor pool.</li>
+    <br>
+    <li><b>Completed Jobs</b> lists jobs that finished running on Condor, with results available to download.</li>
+    <br>
+    <li><b>Errors</b> lists jobs that have failed, along with information on why the job may have failed.</li>
+    <br>
+    <li><b>Change password</b> allows you to change the password associated with your Condor-COPASI account. Note, this password is unrelated to any other system accounts you may have.</li>
+</ul>
+<p>More information on this section is available on the <a href="http://code.google.com/p/condor-copasi/wiki/Instructions" target="_blank">Wiki site</a></p>
+{%endblock%}

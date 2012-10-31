@@ -1,0 +1,36 @@
+{% extends "default.html" %}
+
+{% block body %}
+{% if not user.is_authenticated %}
+<h3>Welcome</h3>
+<p>Welcome to the Condor-COPASI web frontend.</p>
+<p> If you have a Condor-COPASI account, please log in by clicking the link in the top-right of the page. </p>
+<p> If you do not have a Condor-COPASI account, you will need to request one before you can use the system. Please contact the system administrator for further details. </p>
+
+{% else %}
+<h3>Welcome, {{ user.username }}</h3>
+<p>Welcome to the Condor-COPASI web frontend.</p>
+<p>To check on the status of jobs you have submitted, select 'My Account' from the menu on the left. Or, to add a new job, select 'Tasks', and choose the type of job you wish to submit.</p>
+
+<p>For help on how to use Condor COPASI, and for further information on the system, select 'Help'.</p>
+
+
+{% if status %}
+<h2>Condor pool status</h2>
+<p>The status of the condor pool (updated {{ status.time|timesince }} ago) is as follows:</p>
+
+<div class="review">
+<table>
+<tr><th>Total number of machines</th><td>{{status.total}}</td></tr>
+<tr><th>Machines running jobs</th><td>{{status.claimed}}</td></tr>
+<tr><th>Machines available</th><td>{{status.unclaimed}}</td></tr>
+</table>
+</div>
+{% if pool_status_page %}
+<p>Further details on the Condor pool status are available on the <a href="{{pool_status_page}}" target="_blank">pool status page</a>.</p>
+
+{% endif %}
+{% endif %}
+{% endif %}
+{% endblock %}
+
