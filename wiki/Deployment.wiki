@@ -201,7 +201,14 @@ sudo chmod g+rws /var/www/condor-copasi/user-files
 }}}
 
 ==Configure the Web Server Umask==
-Although we have now created a folder that has the appropriate group permissions, by default, any directories and files added by Apache will not be group writeable. To fix this, change the default umask for Apache to 002 (add the following line to /etc/apache2/envvars and restart Apache):
+Although we have now created a folder that has the appropriate group permissions, by default, any directories and files added by Apache will not be group writeable. To fix this, change the default umask for Apache to 002
+
+On Debian-like systems, add the following line to /etc/apache2/envvars and restart Apache:
+{{{
+umask 002
+}}}
+
+Alternatively, on systems such as Slackware, edit the http startup script /etc/rc.d/rc.httpd, and add the following line:
 {{{
 umask 002
 }}}
